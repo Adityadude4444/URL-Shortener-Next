@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
 
     const shcode = nanoid(8);
 
-    const createurl = await prisma.url.create({
+    await prisma.url.create({
       data: {
         ogurl: url,
         shorten: shcode,

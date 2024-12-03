@@ -1,5 +1,5 @@
 "use client";
-import { CopyIcon, EyeIcon } from "lucide-react";
+import { CopyIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
