@@ -28,7 +28,6 @@ const Shortener = ({ handleurl }: Shortenprops) => {
         throw new Error("Failed to shorten the URL");
       }
 
-      const data = await response.json();
       seturl("");
       handleurl();
     } catch (error) {
