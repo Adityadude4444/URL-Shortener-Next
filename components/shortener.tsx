@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
-const Shortener = () => {
+interface Shortenprops {
+  handleurl: () => void;
+}
+
+const Shortener = ({ handleurl }: Shortenprops) => {
   const [url, seturl] = useState<string>("");
   const onclick = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,8 +29,8 @@ const Shortener = () => {
       }
 
       const data = await response.json();
-      console.log("Shortened URL:", data.shortcode);
       seturl("");
+      handleurl();
     } catch (error) {
       console.error("Error creating shortened URL:", error);
     }
