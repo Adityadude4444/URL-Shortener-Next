@@ -5,10 +5,33 @@ import { Button } from "./ui/button";
 
 const Shortener = () => {
   const [url, seturl] = useState<string>("");
-  const onclick = (e: React.FormEvent) => {
+  const onclick = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(url);
+
+    if (!url.trim()) {
+      console.error("URL cannot be empty");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to shorten the URL");
+      }
+
+      const data = await response.json();
+      console.log("Shortened URL:", data.shortcode);
+      seturl("");
+    } catch (error) {
+      console.error("Error creating shortened URL:", error);
+    }
   };
+
   return (
     <form onSubmit={onclick}>
       <div className="flex flex-col gap-2 w-full">
